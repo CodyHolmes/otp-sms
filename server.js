@@ -3,6 +3,8 @@
 */
 const app = require('express')();
 const bodyParser = require('body-parser');
+const Slack = require('slack');
+const tc = require('@codyholmes/tc-async-helper');
 
 if (process.env.NODE_ENV !== 'production') {
   const dotenv = require('dotenv');
@@ -19,7 +21,7 @@ const sendMessage = async text => {
   let bot = new Slack({ token });
 
   const [slackError, slackResponse] = await tc(
-    bot.chat.postMessage({ channel: '#codes', text })
+    bot.chat.postMessage({ channel: '#otp', text })
   );
 
   // If we get an error back from Slack return an error
